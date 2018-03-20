@@ -6,20 +6,23 @@
     </head>
     <body>
       <h1>Welcome to the Zen Roster Creator 0.0.1!</h1>
+
+      <input type='button' id='loadRosterButton'>Load Roster</input>
       <script>
          const {ipcRenderer} = require('electron');
-         function onClick() {
+         const $ = require('jquery');
+         // When the load roster button is clicked
+         $('#loadRosterButton').on('click', () => {
            ipcRenderer.send('loadRoster');
-           console.log("Clicked");
-         }
+         });
+
          ipcRenderer.on('rosterData', (event, data) => {
            ipcRenderer.send('getTeams');
-           console.log("Sent event");
          });
+
          ipcRenderer.on('teamsList', (event, data) => {
            document.write(data);
          });
       </script>
-      <input type='button' onclick="onClick()">Load Roster</input>
     </body>
   </html>

@@ -1,7 +1,7 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
-  const path = require('path');
-  const url = require('url');
-
+const path = require('path');
+const url = require('url');
+const loader = require('./loader.js');
   // Window object
   let win;
   // JSON file object
@@ -61,14 +61,6 @@ const {app, BrowserWindow, ipcMain} = require('electron');
   });
 
 ipcMain.on('getTeams', (event, t) => {
-  console.log("Event received");
-  getTeams(jsonData);
-  function getTeams(data) {
-    let teamsList = [];
-    for (i = 0; i < data.teams.length; i++) {
-      teamsList.push(data.teams[i].region);
-    }
-    console.log(teamsList);
-    event.sender.send('teamsList', teamsList);
-  }
+  // Return list of teams as array
+  event.sender.send('teamsList', loader.getTeams(jsonData));
 });
