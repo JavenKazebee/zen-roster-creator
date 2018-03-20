@@ -1,0 +1,22 @@
+{
+  "name": "zen-roster-creator",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrazyJavy/zen-roster-creator.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KrazyJavy/zen-roster-creator/issues"
+  },
+  "homepage": "https://github.com/KrazyJavy/zen-roster-creator#readme",
+  "devDependencies": {
+    "electron": "^1.8.4"
+  }
+}

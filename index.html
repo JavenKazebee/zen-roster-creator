@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Zen Roster Creator</title>
+    </head>
+    <body>
+      <h1>Welcome to the Zen Roster Creator 0.0.1!</h1>
+      <script>
+         const {ipcRenderer} = require('electron');
+         function onClick() {
+           console.log("Clicked");
+           ipcRenderer.send('loadRoster');
+         }
+         ipcRenderer.on('rosterData', (event, data) => {
+           document.write(data);
+         });
+      </script>
+      <input type='button' onclick="onClick()">Load Roster</input>
+    </body>
+  </html>
