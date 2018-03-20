@@ -4,6 +4,8 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 
   // Window object
   let win;
+  // JSON file object
+  let jsonData;
 
   function createWindow () {
     // Create the browser window.
@@ -31,14 +33,14 @@ const {app, BrowserWindow, ipcMain} = require('electron');
     app.quit();
   });
 
-  // When we receive the openFile event
+  // When we receive the loadRoster event
   ipcMain.on('loadRoster', (event, path) => {
     const {dialog} = require('electron');
     const fs = require('fs');
     // Initialize the systems file open dialog
     dialog.showOpenDialog(function(files) {
       if(files === undefined) {
-        console.log("No file selected");
+
       } else {
         readFile(files[0]);
       }
@@ -51,8 +53,22 @@ const {app, BrowserWindow, ipcMain} = require('electron');
           alert("Could not open file : " + err.message);
           return;
         }
-        // Otherwise, activate fileData event
-        event.sender.send('rosterData', data);
+        event.sender.send('rosterData');
+        // Otherwise, parse JSON and assign to object
+        jsonData = JSON.parse(data);
       });
     }
   });
+
+ipcMain.on('getTeams', (event, t) => {
+  console.log("Event received");
+  getTeams(jsonData);
+  function getTeams(data) {
+    let teamsList = [];
+    for (i = 0; i < data.teams.length; i++) {
+      teamsList.push(data.teams[i].region);
+    }
+    console.log(teamsList);
+    event.sender.send('teamsList', teamsList);
+  }
+});

@@ -9,10 +9,14 @@
       <script>
          const {ipcRenderer} = require('electron');
          function onClick() {
-           console.log("Clicked");
            ipcRenderer.send('loadRoster');
+           console.log("Clicked");
          }
          ipcRenderer.on('rosterData', (event, data) => {
+           ipcRenderer.send('getTeams');
+           console.log("Sent event");
+         });
+         ipcRenderer.on('teamsList', (event, data) => {
            document.write(data);
          });
       </script>
