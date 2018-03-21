@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Import jQuery -->
+    <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');</script>
+    <!-- Import jQuery UI -->
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+    <script src="jquery-ui/external/jquery/jquery.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Zen Roster Creator</title>
+
+    <script>
+      $(function() {
+        $('#mainTabs').tabs();
+      });
+    </script>
+  </head>
+
+  <body>
+
+    <div id='mainTabs'>
+      <ul>
+        <li><a href = '#mainTabsTeams'>Teams</a></li>
+        <li><a href = '#mainTabsPlayers'>Players</a></li>
+        <li><a href = '#mainTabsLeague'>League</a></li>
+      </ul>
+      <div id = 'mainTabsTeams'>
+        Teams go here
+      </div>
+      <div id = 'mainTabsPlayers'>
+        Players go here
+      </div>
+      <div id = 'mainTabsLeague'>
+        League info goes here
+      </div>
+    </div>
+
+  </body>
+</html>

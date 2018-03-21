@@ -2,10 +2,10 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
 const loader = require('./loader.js');
-  // Window object
-  let win;
-  // JSON file object
-  let jsonData;
+// Window object
+let win;
+// JSON file object
+let jsonData;
 
   function createWindow () {
     // Create the browser window.
@@ -13,10 +13,10 @@ const loader = require('./loader.js');
 
     // and load the index.html of the app.
     win.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
-      protocol: 'file:',
-      slashes: true
-    }))
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
     win.webContents.openDevTools();
     // Emitted when the window is closed.
     win.on('closed', () => {
@@ -58,6 +58,8 @@ const loader = require('./loader.js');
         jsonData = JSON.parse(data);
       });
     }
+    // Load edit.html page
+    win.loadURL('file://' + __dirname + '/edit.html');
   });
 
 ipcMain.on('getTeams', (event, t) => {

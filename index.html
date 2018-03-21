@@ -24,14 +24,6 @@
          $('#loadRosterButton').on('click', () => {
            ipcRenderer.send('loadRoster');
          });
-
-         ipcRenderer.on('rosterData', (event, data) => {
-           ipcRenderer.send('getTeams');
-         });
-
-         ipcRenderer.on('teamsList', (event, data) => {
-           document.write(data);
-         });
       </script>
     </body>
   </html>
