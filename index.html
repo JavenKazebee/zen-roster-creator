@@ -1,16 +1,25 @@
 <!DOCTYPE html>
   <html>
     <head>
+      <!-- Import jQuery -->
+      <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');</script>
+      <!-- Import jQuery UI -->
+      <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+      <script src="jquery-ui/external/jquery/jquery.js"></script>
+      <script src="jquery-ui/jquery-ui.min.js"></script>
       <meta charset="UTF-8">
       <title>Zen Roster Creator</title>
     </head>
     <body>
       <h1>Welcome to the Zen Roster Creator 0.0.1!</h1>
 
-      <input type='button' id='loadRosterButton'>Load Roster</input>
+      <button id='loadRosterButton'>Load Roster</button>
       <script>
          const {ipcRenderer} = require('electron');
-         const $ = require('jquery');
+         // Create roster loadRosterButton
+         $(function() {
+           $('#loadRosterButton').button();
+         });
          // When the load roster button is clicked
          $('#loadRosterButton').on('click', () => {
            ipcRenderer.send('loadRoster');
