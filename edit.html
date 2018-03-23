@@ -11,9 +11,34 @@
     <title>Zen Roster Creator</title>
 
     <script>
+      const {ipcRenderer} = require('electron');
+      const proto = require('./prototypes.js');
+      function teamButtonClick(id) {
+        console.log("Button with id of " + id + " was clicked.");
+        ipcRenderer.send('getTeamInfo', id);
+      }
       $(function() {
         $('#mainTabs').tabs();
       });
+      $(document).ready(function() {
+        // Create the Teams, Players, and League tabs
+        console.log("Document ready!");
+        // Generate buttons for each team
+        ipcRenderer.send('getTeams');
+        ipcRenderer.on('teamsList', (event, teamsList) => {
+          // Loop through each team in teamsList
+          for(i = 0; i < teamsList.length; i++) {
+            t = teamsList[i];
+            console.log("Creating button form team id: " + t.id + " with a name of " + t.name);
+            let button = $('#teamsList')
+              .append($('<button>' + t.name + '</button>'))
+              .attr({id:'teamButton' + t.id})
+              .button();
+            button.on('click', teamButtonClick(i));
+          }
+        });
+      });
+
     </script>
   </head>
 
@@ -26,7 +51,9 @@
         <li><a href = '#mainTabsLeague'>League</a></li>
       </ul>
       <div id = 'mainTabsTeams'>
-        Teams go here
+        <div id = 'teams'>
+          <div id = 'teamsList'></div>
+        </div>
       </div>
       <div id = 'mainTabsPlayers'>
         Players go here

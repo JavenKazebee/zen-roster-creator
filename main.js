@@ -2,6 +2,7 @@ const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
 const loader = require('./loader.js');
+const proto = require('./prototypes.js');
 // Window object
 let win;
 // JSON file object
@@ -39,13 +40,14 @@ let jsonData;
     const fs = require('fs');
     // Initialize the systems file open dialog
     dialog.showOpenDialog(function(files) {
+      // If no file selected, do nothing
       if(files === undefined) {
 
       } else {
         readFile(files[0]);
       }
     });
-
+    // Load and parse the file
     function readFile(path) {
       fs.readFile(path, 'utf-8', (err, data) => {
         // If there is an error, alert the user
